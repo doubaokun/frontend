@@ -11,7 +11,8 @@ object ActiveExperiments extends ExperimentsDefinition {
     CommercialAdRefresh,
     OrielParticipation,
     LotameParticipation,
-    LineHeightFontSize
+    LineHeightFontSize,
+    OldTLSSupportDeprecation
   )
   implicit val canCheckExperiment = new CanCheckExperiment(this)
 }
@@ -54,4 +55,13 @@ object LineHeightFontSize extends Experiment(
   owners = Seq(Owner.withGithub("frankie297")),
   sellByDate = new LocalDate(2018, 5, 17),
   participationGroup = Perc1B
+)
+
+object OldTLSSupportDeprecation extends Experiment(
+  name = "old-tls-support-deprecation",
+  description = "This will turn on a deprecation notice to any user who is accessing our site using TLS v1.0 or v1.1",
+  owners = Seq(Owner.withGithub("natalialkb")),
+  sellByDate = new LocalDate(2018, 6, 13),
+  // Custom group based on header set in Fastly
+  participationGroup = TLSSupport
 )
